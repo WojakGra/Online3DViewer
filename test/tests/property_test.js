@@ -98,7 +98,7 @@ describe ('Property Test', function () {
     it ('Property to string', function() {
         assert.strictEqual (OV.PropertyToString (new OV.Property (OV.PropertyType.Text, 'name', 'test')), 'test');
         assert.strictEqual (OV.PropertyToString (new OV.Property (OV.PropertyType.Integer, 'name', 42)), '42');
-        assert.strictEqual (OV.PropertyToString (new OV.Property (OV.PropertyType.Number, 'name', 3.14)), '3.14');
+        assert.strictEqual (OV.PropertyToString (new OV.Property (OV.PropertyType.Number, 'name', 3.14)), '3,14');
         assert.strictEqual (OV.PropertyToString (new OV.Property (OV.PropertyType.Boolean, 'name', true)), 'True');
         assert.strictEqual (OV.PropertyToString (new OV.Property (OV.PropertyType.Boolean, 'name', false)), 'False');
         assert.strictEqual (OV.PropertyToString (new OV.Property (OV.PropertyType.Percent, 'name', 0.2)), '20%');
