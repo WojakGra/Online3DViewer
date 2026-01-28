@@ -39,6 +39,8 @@ def GetParametersFromDoclet (doclet):
         paramTypes = None
         if 'type' in param:
             paramTypes = param['type']['names']
+        if paramTypes is None:
+            paramTypes = []
         if len (paramNameParts) == 1:
             paramDoc = ParameterDoc (
                 paramName,
@@ -55,8 +57,19 @@ def GetParametersFromDoclet (doclet):
                 paramIsOptional,
                 GetDictValue (param, 'description')
             )
-            paramNamespace = '.'.join (paramNameParts[0:-1])
-            paramNamespaceToDoc[paramNamespace].AddSubParameter (paramDoc)
+            paramNamespace = '.'.join(paramNameParts[0:-1])
+            # Ensure parent namespace exists
+            if paramNamespace not in paramNamespaceToDoc:
+                # Create a placeholder parent ParameterDoc if missing
+                parentDoc = ParameterDoc (
+                    paramNameParts[0],
+                    [],
+                    False,
+                    None
+                )
+                paramNamespaceToDoc[paramNameParts[0]] = parentDoc
+                parameters.append(parentDoc)
+            paramNamespaceToDoc[paramNamespace].AddSubParameter(paramDoc)
             paramNamespaceToDoc[paramName] = paramDoc
     return parameters
 
